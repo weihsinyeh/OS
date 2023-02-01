@@ -1,0 +1,13 @@
+Task aaa is ready.
+Task ccc is ready.
+Task ddd is ready.
+Task eee is ready.
+Task fff is ready.
+
+  TID|    name|       state|   running|   waiting|turnaround|       resources|  priority
+-------------------------------------------------------------------------------------------
+    1|     aaa|  TERMINATED|         0|         1|        71|            none|         2
+    2|     ccc|  TERMINATED|         0|         6|       173|            none|         5
+    3|     ddd|  TERMINATED|         0|         4|       153|            none|         4
+    4|     eee|  TERMINATED|         0|         2|       112|            none|         3
+    5|     fff|  TERMINATED|         0|         0|       214|            none|         1
