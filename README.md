@@ -9,6 +9,7 @@
 在作業系統這堂課，實作三個項目：Shell、Multi-threaded and kernel module programming與Scheduler Simulator，過程中學到了許多底層系統程式的寫法，也對作業系統的運作有了初步的瞭解。
 
 ### Shell
+![Alt text](<Screenshot from 2023-09-17 00-08-34.png>)
 #### Shell功能描述
 ![image](https://user-images.githubusercontent.com/90430653/221482731-92cd492a-0948-4e7a-9d91-e2a2bcece4f8.png)
 
