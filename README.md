@@ -44,6 +44,7 @@ A : 分三部分解釋
  
 內積總共要加總多少個元素相成的數量?  A : 矩陣1的col的數量 或 矩陣2的row的數量。
 至於要內積哪行哪列 
+
 ```
 11/  (3 = result矩陣的行數) = 3 (第3列)
 11%  (3 = result 矩陣的行數 ) = 2(第2行)
@@ -54,6 +55,7 @@ For(x  in 矩陣1的col的數量){
 元素( 矩陣2的 第x列 * 矩陣2的col的數量 + 2) 
 }
 ```
+
 Code 
  ![image](https://github.com/weihsinyeh/Operating-System/assets/90430653/7adc938c-4bff-470a-b095-ea3ccf6e5c08)
  
