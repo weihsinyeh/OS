@@ -44,7 +44,7 @@ A : 分三部分解釋
  
 內積總共要加總多少個元素相成的數量?  A : 矩陣1的col的數量 或 矩陣2的row的數量。
 至於要內積哪行哪列 
-/*********************************************************/
+```
 11/  (3 = result矩陣的行數) = 3 (第3列)
 11%  (3 = result 矩陣的行數 ) = 2(第2行)
 所以就是矩陣1的第3行與矩陣2的第2行內積。
@@ -53,14 +53,19 @@ For(x  in 矩陣1的col的數量){
 元素( 矩陣1的 第3列 * 矩陣1的col的數量 + x ) *
 元素( 矩陣2的 第x列 * 矩陣2的col的數量 + 2) 
 }
-/*********************************************************/
+```
 Code 
  ![image](https://github.com/weihsinyeh/Operating-System/assets/90430653/7adc938c-4bff-470a-b095-ea3ccf6e5c08)
+ 
 Q : You are given four test cases. For each test case, you have to plot the matrix multiplication execution time with the following worker thread numbers. Worker thread number: 1,2,3,4,8,16,24,32. 
+
 You have to summarize the four charts you plot. ( 詳見附錄 )
 ![image](https://github.com/weihsinyeh/Operating-System/assets/90430653/7b5a4e6e-d2c8-4408-b4f3-414437096f45)
+
 ![image](https://github.com/weihsinyeh/Operating-System/assets/90430653/38e5d67d-b4f9-48f2-8a3c-a10037055168)
+
 ![image](https://github.com/weihsinyeh/Operating-System/assets/90430653/0725fdab-1734-4d8f-9481-51e53f2e13d3)
+
 ![image](https://github.com/weihsinyeh/Operating-System/assets/90430653/44497daf-9399-48f0-947c-ac2e9f086ebb)
 
 1. What happen if the number of threads is less than the number of cores. Why ? 
@@ -69,22 +74,22 @@ A :
 因為矩陣計算屬於CPU bound的task，透過multi thread 主要是提升CPU 的使用率。對於虛擬機的4core來說，其實用4個thread 就可達到很好的效果讓一個thread 使用1個core。所以我們也看到4個test執行時間最短的都大概為4個thread。
 
 2. What happen if the number of threads is greater than the number of cores. Why ? 
-A:  
-    core的數量大於thread的數量時，隨著thread的數量增加，elapsed time 並沒有像thread的數量小於number of cores時有大幅度下降，反而趨近於平緩，甚至有些還一點點增加了。
-    因為當thread的數量超過core時，每個thread在執行部分時間就要將cpu 的control交給其他thread。而這個交換稱為context switch。Context switch is not free。必須要花時間儲存CPU的狀態，包刮暫存器的值得保存與更新新的暫存器的值，Program counter的切換...等。這些都需要花時間。這樣的overhead可能 將 多平行處理帶來的效益降低，甚至超過，所以才有上述的現象發生。
+A:  core的數量大於thread的數量時，隨著thread的數量增加，elapsed time 並沒有像thread的數量小於number of cores時有大幅度下降，反而趨近於平緩，甚至有些還一點點增加了。因為當thread的數量超過core時，每個thread在執行部分時間就要將cpu 的control交給其他thread。而這個交換稱為context switch。Context switch is not free。必須要花時間儲存CPU的狀態，包刮暫存器的值得保存與更新新的暫存器的值，Program counter的切換...等。這些都需要花時間。這樣的overhead可能 將 多平行處理帶來的效益降低，甚至超過，所以才有上述的現象發生。
 
 
 3.  Anything else you observe ?
-觀察四筆測資元素相對於cache access的排列方式
-比較4筆測資所花的時間，測資1因為處理數量(2048 * 2048 )遠小於 測資2的處理數量(4096 * 4096 。所以用時比較少。而測資3(1*4096) * (4096*4096)與測資4(4096*4096) *(4096*1 )。
+觀察四筆測資元素相對於cache access的排列方式，比較4筆測資所花的時間，測資1因為處理數量(2048 * 2048 )遠小於 測資2的處理數量(4096 * 4096 。所以用時比較少。而測資3(1*4096) * (4096*4096)與測資4(4096*4096) *(4096*1 )。
 
 測資3示意 :
 ![image](https://github.com/weihsinyeh/Operating-System/assets/90430653/e4afd4bb-ee49-4aad-b76d-09864e906e25)
 測資4示意 :
 ![image](https://github.com/weihsinyeh/Operating-System/assets/90430653/9b1387d9-68ec-44b3-be15-0b2b95d8de18)
 測資3 可以看到當計算一個元素時，要存取第二個矩陣的column需要跳到下一行。
+
 而相比測資4計算一個元素時，因為第二個元素為row * 1，所以相當於存取的資料都在cache中(只有第一筆資料會cache miss 其他都會cache hit)，充分利用 space locality。
+
 而測資3(則是當矩陣2的行數夠多，每一次存取都會是cache miss)。
+
 而我們比較兩個測資的時間，也是跟想的一樣。測資4花的時間都較測資3少。
 
 
